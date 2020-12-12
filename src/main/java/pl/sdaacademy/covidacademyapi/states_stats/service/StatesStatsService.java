@@ -1,20 +1,21 @@
 package pl.sdaacademy.covidacademyapi.states_stats.service;
 
 import org.springframework.stereotype.Service;
+import pl.sdaacademy.covidacademyapi.states_stats.repository.CovidTrackingApi;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.CovidTrackingApiRepository;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.StateCurrentStats;
 
 @Service
 public class StatesStatsService {
 
-    private CovidTrackingApiRepository covidTrackingApiRepository;
+    private CovidTrackingApi covidTrackingApi;
 
-    public StatesStatsService(CovidTrackingApiRepository covidTrackingApiRepository) {
-        this.covidTrackingApiRepository = covidTrackingApiRepository;
+    public StatesStatsService(CovidTrackingApi covidTrackingApi) {
+        this.covidTrackingApi = covidTrackingApi;
     }
 
     public StateCurrentStats[] getAllStatesCurrentStats() {
-        return covidTrackingApiRepository.getAllStatesCurrentStats();
+        return covidTrackingApi.getAllStatesCurrentStats();
     }
 
 

@@ -1,15 +1,23 @@
 package pl.sdaacademy.covidacademyapi.states_stats.repository;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-@Component
-public class CovidTrackingApiRepository {
+@Repository
+public class CovidTrackingApiRepository implements CovidTrackingApi {
 
+    private final RestTemplate restTemplate;
+    private final String url;
+
+    public CovidTrackingApiRepository(RestTemplate restTemplate, @Value("${covidtrackingapi.url}") String url) {
+        this.url = url;
+        this.restTemplate = restTemplate;
+    }
+
+
+    @Override
     public StateCurrentStats[] getAllStatesCurrentStats() {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "https://api.covidtracking.com/v1/states/current.json";
-        StateCurrentStats[] allStatesCurrentStats = restTemplate.getForObject(url, StateCurrentStats[].class);
-        return allStatesCurrentStats;
+        return restTemplate.getForObject(url, StateCurrentStats[].class);
     }
 }

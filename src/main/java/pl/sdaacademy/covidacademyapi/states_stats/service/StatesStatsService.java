@@ -5,6 +5,8 @@ import pl.sdaacademy.covidacademyapi.states_stats.repository.CovidTrackingApi;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.CovidTrackingApiRepository;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.StateCurrentStats;
 
+import java.util.Date;
+
 @Service
 public class StatesStatsService {
 
@@ -17,8 +19,8 @@ public class StatesStatsService {
     public StateCurrentStats[] getAllStatesCurrentStats() {
         return covidTrackingApi.getAllStatesCurrentStats();
     }
-    public StateCurrentStats[] getSpecificStateOfStates() {
-        return covidTrackingApi.getSpecificStateOfStates();
+    public StateCurrentStats getSpecificStateOfStates(String state, String date) {
+        return covidTrackingApi.getSpecificStateOfStates(state,date);
     }
 
 

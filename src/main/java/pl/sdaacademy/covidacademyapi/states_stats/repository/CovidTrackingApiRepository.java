@@ -4,25 +4,29 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
+
 @Repository
 public class CovidTrackingApiRepository implements CovidTrackingApi {
 
     private final RestTemplate restTemplate;
-    private final String url;
+    private final String url1;
+    private final String url2;
 
-    public CovidTrackingApiRepository(RestTemplate restTemplate, @Value("${covidtrackingapi.url}") String url) {
-        this.url = url;
+    public CovidTrackingApiRepository(RestTemplate restTemplate, @Value("${covidtrackingapi.url}") String url1, @Value("https://api.covidtracking.com/v1/states/ca/20200501.json") String url2) {
+        this.url1 = url1;
+        this.url2 = url2;
         this.restTemplate = restTemplate;
     }
 
 
     @Override
     public StateCurrentStats[] getAllStatesCurrentStats() {
-        return restTemplate.getForObject(url, StateCurrentStats[].class);
+        return restTemplate.getForObject(url1, StateCurrentStats[].class);
     }
 
     @Override
-    public StateCurrentStats[] getSpecificStateOfStates() {
-        return restTemplate.getForObject(url, StateCurrentStats[].class);
+    public StateCurrentStats getSpecificStateOfStates(String state, String date) {
+        return restTemplate.getForObject(url2, StateCurrentStats.class);
     }
 }

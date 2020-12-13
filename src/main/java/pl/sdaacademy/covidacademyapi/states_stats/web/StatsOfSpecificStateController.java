@@ -15,16 +15,13 @@ public class StatsOfSpecificStateController {
     public StatsOfSpecificStateController(StatsOfSpecificStateController statsOfSpecificStateController) {
         this.statsOfSpecificStateController = statsOfSpecificStateController;
     }
-    @RequestMapping(method = RequestMethod.GET,path = "/{state}")
-    @ResponseBody
-    public StateCurrentStats[] getCurrentState(@PathVariable(name = "state")final String state ) {
-        return statsOfSpecificStateController.getCurrentState(state);
-    }
 
-    @RequestMapping(method = RequestMethod.GET,path = "/state/{date}")
+
+
+    @RequestMapping(method = RequestMethod.GET,path = "/{state}/{date}")
     @ResponseBody
-    public StateCurrentStats[] getCurrentState(@PathVariable(name = "date")final Date date ) {
-        return statsOfSpecificStateController.getCurrentState(date);
+    public StateCurrentStats getCurrentState (@PathVariable String state,@PathVariable String date)   {
+        return statsOfSpecificStateController.getCurrentState(state,date);
     }
 
 

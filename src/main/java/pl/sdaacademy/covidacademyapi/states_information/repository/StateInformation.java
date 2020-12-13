@@ -1,4 +1,4 @@
-package pl.sdaacademy.covidacademyapi.states_stats.repository;
+package pl.sdaacademy.covidacademyapi.states_information.repository;
 
 public class StateInformation {
 

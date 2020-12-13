@@ -3,7 +3,6 @@ package pl.sdaacademy.covidacademyapi.states_stats.service;
 import org.springframework.stereotype.Service;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.CovidTrackingApi;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.StateCurrentStats;
-import pl.sdaacademy.covidacademyapi.states_stats.repository.StateInformation;
 
 @Service
 public class StatesStatsService {
@@ -21,10 +20,5 @@ public class StatesStatsService {
     public StateCurrentStats getCurrentState(String state, String date) {
         return covidTrackingApi.getSpecificStateOfStates(state, date);
     }
-
-    public StateInformation[] getAllStatesInformation() {
-        return covidTrackingApi.getAllStatesInformation();
-    }
-
 
 }

@@ -1,6 +1,7 @@
 package pl.sdaacademy.covidacademyapi.states_stats.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.StateCurrentStats;
@@ -19,6 +20,11 @@ public class StatesStatsController {
     @GetMapping
     public StateCurrentStats[] getCurrentStateStats() {
         return statesStatsService.getAllStatesCurrentStats();
+    }
+
+    @GetMapping("/{state}/{date}")
+    public StateCurrentStats getCurrentState(@PathVariable String state, @PathVariable String date) {
+        return statesStatsService.getCurrentState(state, date);
     }
 
 

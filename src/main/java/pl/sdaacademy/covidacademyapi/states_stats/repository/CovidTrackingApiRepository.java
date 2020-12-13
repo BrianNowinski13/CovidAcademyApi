@@ -11,7 +11,7 @@ public class CovidTrackingApiRepository implements CovidTrackingApi {
     private final String url1;
     private final String url2;
 
-    public CovidTrackingApiRepository(RestTemplate restTemplate,@Value("${covidtrackingapi.url1}") String url1, @Value("${covidtrackingapi.ur2l}") String url2) {
+    public CovidTrackingApiRepository(RestTemplate restTemplate, @Value("${covidtrackingapi.url1}") String url1, @Value("${covidtrackingapi.url2}") String url2) {
         this.url1 = url1;
         this.url2 = url2;
         this.restTemplate = restTemplate;
@@ -25,6 +25,6 @@ public class CovidTrackingApiRepository implements CovidTrackingApi {
 
     @Override
     public StateCurrentStats getSpecificStateOfStates(String state, String date) {
-        return restTemplate.getForObject(url2, StateCurrentStats.class);
+        return restTemplate.getForObject(String.format(url2,state,date), StateCurrentStats.class);
     }
 }

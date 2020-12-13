@@ -9,16 +9,16 @@ public class StateTrackingApiRepository implements StateTrackingApi {
 
     private final RestTemplate restTemplate;
 
-    private final String url3;
+    private final String urlMetaData;
 
-    public StateTrackingApiRepository(RestTemplate restTemplate, @Value("${covidtrackingapi.url3}") String url3) {
-        this.url3 = url3;
+    public StateTrackingApiRepository(RestTemplate restTemplate, @Value("${covidtrackingapi.metadata.url}") String urlMetaData) {
+        this.urlMetaData = urlMetaData;
         this.restTemplate = restTemplate;
     }
 
     @Override
     public StateInformation[] getAllStatesInformation() {
-        return restTemplate.getForObject(url3,StateInformation[].class);
+        return restTemplate.getForObject(urlMetaData, StateInformation[].class);
     }
 
 }

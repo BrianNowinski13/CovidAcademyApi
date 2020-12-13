@@ -3,8 +3,6 @@ package pl.sdaacademy.covidacademyapi.states_stats.web;
 import org.springframework.web.bind.annotation.*;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.StateCurrentStats;
 
-import java.util.Date;
-
 @RequestMapping("/states")
 @RestController
 public class StatsOfSpecificStateController {
@@ -17,13 +15,11 @@ public class StatsOfSpecificStateController {
     }
 
 
-
-    @RequestMapping(method = RequestMethod.GET,path = "/{state}/{date}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{state}/{date}")
     @ResponseBody
-    public StateCurrentStats getCurrentState (@PathVariable String state,@PathVariable String date)   {
-        return statsOfSpecificStateController.getCurrentState(state,date);
+    public StateCurrentStats getCurrentState(@PathVariable String state, @PathVariable String date) {
+        return statsOfSpecificStateController.getCurrentState(state, date);
     }
-
 
 
     @GetMapping

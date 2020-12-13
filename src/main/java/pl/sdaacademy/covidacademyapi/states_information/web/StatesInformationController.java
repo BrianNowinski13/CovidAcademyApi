@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.sdaacademy.covidacademyapi.states_information.repository.StateInformation;
 import pl.sdaacademy.covidacademyapi.states_information.service.StatesInformationService;
 
+import java.util.List;
+
 
 @RequestMapping("/states")
 @RestController
@@ -18,7 +20,7 @@ public class StatesInformationController {
     }
 
     @GetMapping("/information")
-    public StateInformation[] getCurrentStateInformation() {
+    public List<StateInformation> getCurrentStateInformation() {
         return statesInformationService.getAllStatesInformation();
     }
 

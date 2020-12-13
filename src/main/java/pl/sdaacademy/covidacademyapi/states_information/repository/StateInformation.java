@@ -1,7 +1,12 @@
 package pl.sdaacademy.covidacademyapi.states_information.repository;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class StateInformation {
 
+    @Id
     private String state;
     private String name;
     private String covid19Site;

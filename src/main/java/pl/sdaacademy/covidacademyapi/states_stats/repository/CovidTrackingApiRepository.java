@@ -20,4 +20,9 @@ public class CovidTrackingApiRepository implements CovidTrackingApi {
     public StateCurrentStats[] getAllStatesCurrentStats() {
         return restTemplate.getForObject(url, StateCurrentStats[].class);
     }
+
+    @Override
+    public StateCurrentStats[] getSpecificStateOfStates() {
+        return restTemplate.getForObject(url, StateCurrentStats[].class);
+    }
 }

@@ -17,6 +17,9 @@ public class StatesStatsService {
     public StateCurrentStats[] getAllStatesCurrentStats() {
         return covidTrackingApi.getAllStatesCurrentStats();
     }
+    public StateCurrentStats[] getSpecificStateOfStates() {
+        return covidTrackingApi.getSpecificStateOfStates();
+    }
 
 
 }

@@ -12,7 +12,8 @@ public class StatesStatsController {
 
     private final StatesStatsService statesStatsService;
 
-    public StatesStatsController(StatesStatsService statesStatsService) {
+    public StatesStatsController(StatesStatsService statesStatsService)
+    {
         this.statesStatsService = statesStatsService;
     }
 

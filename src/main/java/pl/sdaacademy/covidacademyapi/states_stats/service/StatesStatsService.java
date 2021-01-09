@@ -15,24 +15,27 @@ public class StatesStatsService {
 
     private final CovidTrackingApi covidTrackingApi;
     private final StatesInformationService statesInformationService;
+    private final StateStatsTransformer stateStatsTransformer;
 
     @Autowired
-    public StatesStatsService(StatesInformationService statesInformationService, CovidTrackingApi covidTrackingApi) {
+    public StatesStatsService(StatesInformationService statesInformationService, CovidTrackingApi covidTrackingApi, StateStatsTransformer stateStatsTransformer) {
         this.covidTrackingApi = covidTrackingApi;
         this.statesInformationService = statesInformationService;
+        this.stateStatsTransformer = stateStatsTransformer;
     }
 
     public StateCurrentStats[] getAllStatesCurrentStats() {
         return covidTrackingApi.getAllStatesCurrentStats();
     }
 
-    public StateCurrentStats getCurrentState(String state, String date) {
-        String acronym = statesInformationService.getStateByName(state)
+    public StateStatsDTO getCurrentState(String state, String date) {
+        StateInformation stateInformation = statesInformationService.getStateByName(state)
                 .orElseThrow(() -> {
                     throw new NoStateFoundException(state);
-                }).getState();
-
-        return covidTrackingApi.getSpecificStateOfStates(acronym, date);
+                });
+        String acronym = stateInformation.getState();
+        StateCurrentStats stateCurrentStats = covidTrackingApi.getSpecificStateOfStates(acronym, date);
+        return stateStatsTransformer.stateStatsDTO(stateCurrentStats,stateInformation);
     }
 
 }

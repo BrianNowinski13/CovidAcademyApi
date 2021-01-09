@@ -7,9 +7,10 @@ import pl.sdaacademy.covidacademyapi.states_information.repository.StatesMetadat
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class StatesInformationService {
+public class StatesInformationService  {
 
     private final StateTrackingApi stateTrackingApi;
     private final StatesMetadataDbRepository statesMetadataDbRepository;
@@ -23,8 +24,21 @@ public class StatesInformationService {
         if(statesMetadataDbRepository.count() > 0) {
             return statesMetadataDbRepository.findAll();
         }
+
+        return fetchMetadata();
+    }
+
+    private List<StateInformation> fetchMetadata() {
         List<StateInformation> stateInformation = Arrays.asList(stateTrackingApi.getAllStatesInformation());
         return statesMetadataDbRepository.saveAll(stateInformation);
+    }
+
+    public Optional<StateInformation> getStateByName(String name) {
+
+        if(statesMetadataDbRepository.count() == 0) {
+            fetchMetadata();
+        }
+        return statesMetadataDbRepository.findByNameIgnoreCase(name);
     }
 
 

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StatesInformationService  {
+public class StatesInformationService {
 
     private final StateTrackingApi stateTrackingApi;
     private final StatesMetadataDbRepository statesMetadataDbRepository;
@@ -21,7 +21,7 @@ public class StatesInformationService  {
     }
 
     public List<StateInformation> getAllStatesInformation() {
-        if(statesMetadataDbRepository.count() > 0) {
+        if (statesMetadataDbRepository.count() > 0) {
             return statesMetadataDbRepository.findAll();
         }
 
@@ -35,11 +35,17 @@ public class StatesInformationService  {
 
     public Optional<StateInformation> getStateByName(String name) {
 
-        if(statesMetadataDbRepository.count() == 0) {
+        if (statesMetadataDbRepository.count() == 0) {
             fetchMetadata();
         }
         return statesMetadataDbRepository.findByNameIgnoreCase(name);
     }
 
+    public Optional<StateInformation> getStateById(String id) {
+        if(statesMetadataDbRepository.count() == 0) {
+            fetchMetadata();
+        }
+        return statesMetadataDbRepository.findById(id);
+    }
 
 }

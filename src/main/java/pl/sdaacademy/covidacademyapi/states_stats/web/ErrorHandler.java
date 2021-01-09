@@ -12,7 +12,7 @@ public class ErrorHandler {
 
     @ExceptionHandler(value = NoStateFoundException.class)
     public ResponseEntity<Object> handleNostateFound(NoStateFoundException exception) {
-        return new  ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
 }

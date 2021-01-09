@@ -10,7 +10,7 @@ public class StateInformation {
     @Id
     private String state;
     private String name;
-    @Column(columnDefinition= "LONGTEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String covid19Site;
     private String twitter;
 

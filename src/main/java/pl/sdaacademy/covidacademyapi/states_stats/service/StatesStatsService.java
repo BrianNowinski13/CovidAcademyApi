@@ -1,11 +1,14 @@
 package pl.sdaacademy.covidacademyapi.states_stats.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.sdaacademy.covidacademyapi.states_information.repository.StateInformation;
 import pl.sdaacademy.covidacademyapi.states_information.service.StatesInformationService;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.CovidTrackingApi;
 import pl.sdaacademy.covidacademyapi.states_stats.repository.StateCurrentStats;
+import pl.sdaacademy.covidacademyapi.states_stats.web.ErrorHandler;
 
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class StatesStatsService {
         List<StateInformation> statesInformationServiceList = statesInformationService.getAllStatesInformation();
          String acronym = statesInformationServiceList.stream().filter(metadata -> metadata.getName().equalsIgnoreCase(state))
                 .map(metadate -> metadate.getState())
-                .findAny().get();
+                .findAny().orElseThrow(() ->{throw new NoStateFoundException(state);});
 
         return covidTrackingApi.getSpecificStateOfStates(acronym, date);
     }

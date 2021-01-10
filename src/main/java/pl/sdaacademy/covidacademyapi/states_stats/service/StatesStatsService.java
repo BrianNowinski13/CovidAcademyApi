@@ -38,7 +38,7 @@ public class StatesStatsService {
 
     public StateStatsDTO getCurrentState(String state, String date) {
         StateInformation stateInformation = statesInformationService.getStateByName(state)
-                .orElseThrow(() -> {
+                .<NoStateFoundException>orElseThrow(() -> {
                     throw new NoStateFoundException(state);
                 });
         String acronym = stateInformation.getState();
